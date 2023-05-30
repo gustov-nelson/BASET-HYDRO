@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Device Control</title>
+</head>
+<body>
+    <h1>Device Control</h1>
+    <form method="post">
+        Light: <input type="checkbox" name="light_state" value="on" {% if light_state %} checked {% endif %}><br>
+        Pump: <input type="checkbox" name="pump_state" value="on" {% if pump_state %} checked {% endif %}><br>
+        Heater: <input type="checkbox" name="heater_state" value="on" {% if heater_state %} checked {% endif %}><br>
+        VDC: <input type="checkbox" name="VDC_state" value="on" {% if VDC_state %} checked {% endif %}><br>
+        Fan: <input type="checkbox" name="fan_state" value="on" {% if fan_state %} checked {% endif %}><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
