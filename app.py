@@ -193,10 +193,16 @@ def light_timer_control():     #Turns lights on and off based on timer
     while True:
         if light_state: # Program will skip this code if user wants lights to stay off using device_control()
             current_hour = int(datetime.datetime.now().hour) #Graps the current hour,between 0(midnight) and 23 (11pm)
-            if (light_timer_on <= current_hour) and (current_hour < light_timer_off): #Compares the current time with the hours of operation
-                GPIO.output(Lights, GPIO.HIGH)
-            else:
-                GPIO.output(Lights, GPIO.LOW)
+            if light_timer_on < light_timer_off: #Executed if the time of operation does NOT span midnight
+                if (light_timer_on <= current_hour) and (current_hour < light_timer_off): #Compares the current time with the hours of operation
+                    GPIO.output(Lights, GPIO.HIGH)
+                else:
+                    GPIO.output(Lights, GPIO.LOW)
+            else: #Executed if the time of operation spans midnight
+                if (current_hour >= light_timer_on) or (current_hour < light_timer off): #Checks if hour is after start of first day or before end of second day 
+                    GPIO.output(Lights, GPIO.HIGH)
+                else:
+                    GPIO.output(Lights, GPIO.LOW)
         else:
             GPIO.output(Lights, GPIO.LOW)  #If program skips the rest of the code becasue light_state is False: this turns the lights off
         time.sleep(1)
