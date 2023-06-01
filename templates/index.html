@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+        }
+        #left-side {
+            width: 60%;
+        }
+        #right-side {
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div id="right-side">
+        <h1>Live Webcam Feed</h1>
+        <img src="{{ url_for('video_feed') }}" />
+    </div>
+
+    <div id="left-side">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            function updateValues() {
+                $.getJSON('/current_values', function(data) {
+                    $('p#temp').text('Temperature: ' + data.temp);
+                    $('p#pH').text('pH: ' + data.pH);
+                    $('p#ec').text('EC: ' + data.ec);
+                });
+            }
+
+            $(document).ready(function() {
+                setInterval(updateValues, 5000);  // Call updateValues every 5000 ms
+            });
+        </script>
+        <h1>Welcome to your hydroponic's Console</h1>
+        <p>Click below to see the Bill of Materials</p>
+        <a href="/products">Bill of Materials</a>
+        <a >      This page will take a minute to load</a>
+
+        <h1>Device Control</h1>
+        <form method="post">
+            <input type="hidden" name="form_name" value="device_control">
+            Light: <input type="checkbox" name="light_state" value="on" {% if light_state %} checked {% endif %}><br>
+            Pump: <input type="checkbox" name="pump_state" value="on" {% if pump_state %} checked {% endif %}><br>
+            Water Heater: <input type="checkbox" name="water_heater_state" value="on" {% if water_heater_state %} checked {% endif %}><br>
+            VDC: <input type="checkbox" name="VDC_state" value="on" {% if VDC_state %} checked {% endif %}><br>
+            Fan: <input type="checkbox" name="fan_state" value="on" {% if fan_state %} checked {% endif %}><br>
+            Heater: <input type="checkbox" name="heater_state" value="on" {% if heater_state %} checked {% endif %}><br>
+            <input type="submit" value="Submit">
+        </form>
+        <h1>Settings</h1>
+        <form method="post">
+            <input type="hidden" name="form_name" value="settings">
+            pH High: <input type="number" name="pH_high" value="{{ pH_high }}"><br>
+            pH Low: <input type="number" name="pH_low" value="{{ pH_low }}"><br>
+            EC High: <input type="number" name="ec_high" value="{{ ec_high }}"><br>
+            EC Low: <input type="number" name="ec_low" value="{{ ec_low }}"><br>
+            Water Temp High: <input type="number" name="water_temp_high" value="{{ water_temp_high }}"><br>
+            Water Temp Low: <input type="number" name="water_temp_low" value="{{ water_temp_low }}"><br>
+            Light Timer Start: <input type="number" name="light_timer_on" value="{{ light_timer_on }}"><br>
+            Light Timer Stop: <input type="number" name="light_timer_off" value="{{ light_timer_off }}"><br>
+            <input type="submit" value="Submit">
+        </form>
+        <h2>Sensor Readings</h2>
+        <p id="temp">Temperature: {{ temp }}</p>
+        <p id="pH">pH: {{ pH }}</p>
+        <p id="ec">EC: {{ ec }}</p>
+    </div>
+</body>
+</html>
