@@ -10,7 +10,7 @@ int ECPower=A4;
 int ECGround=A0;
 float PPMconversion=0.7;
 float TemperatureCoef = 0.019; //this changes depending on what chemical we are measuring
-float K=3.2;
+float K=1.45;
 float EC=0;
 float EC25 =0;
 int ppm =0;
@@ -22,7 +22,7 @@ float buffer=0;
 
 //pH code
 const int pHsensorPin = A3;
-float calibration_value = 26.84;
+float calibration_value = 34.57;
 int phval = 0; 
 unsigned long int avgval; 
 int buffer_arr[10],temp;
@@ -77,7 +77,7 @@ float GetEC(){
   raw= analogRead(ECPin);// This is not a mistake, First reading will be low beause if charged a capacitor
   digitalWrite(ECPower,LOW);
   pinMode(ECPower, INPUT);
-  pinMode(ECGround, LOW);
+  pinMode(ECGround, INPUT);
   Vdrop= (Vin*raw)/1024.0;
   Rc=(Vdrop*R1)/(Vin-Vdrop);
   Rc=Rc-Ra; //acounting for Digital Pin Resitance
