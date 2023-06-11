@@ -159,7 +159,7 @@ def read_serial():
     while True:
         if ser.in_waiting > 0:   #Activates everytime there is a new serial output from the Arduino
             line = ser.readline().decode('utf-8').rstrip() #The data is sent in the format tempXpHXecX to simplify serial communication   
-            temp, pH, ec = map(float, line.split('X'))     #This line splits the single string into three floating values. 
+            temp, ec, pH = map(float, line.split('X'))     #This line splits the single string into three floating values. 
                                                         
 
 # Adds acid, base or nutrients as needed
