@@ -1,0 +1,117 @@
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <Wire.h>
+
+//EC code 
+int R1= 1000;
+int Ra=25; //Resistance of powering Pins
+int ECPin=A5;
+int ECPower=A4;
+int ECGround=A0;
+float PPMconversion=0.7;
+float TemperatureCoef = 0.019; //this changes depending on what chemical we are measuring
+float K=3.2;
+float EC=0;
+float EC25 =0;
+int ppm =0;
+float raw= 0;
+float Vin= 5;
+float Vdrop= 0;
+float Rc= 0;
+float buffer=0;
+
+//pH code
+const int pHsensorPin = A3;
+float calibration_value = 26.84;
+int phval = 0; 
+unsigned long int avgval; 
+int buffer_arr[10],temp;
+int control = 0;
+
+//Temp code
+const int temp_sensor_pin = 2;
+OneWire oneWire(temp_sensor_pin);         // setup a oneWire instance
+DallasTemperature tempSensor(&oneWire); // pass oneWire to DallasTemperature library
+
+void setup() 
+{
+  Serial.begin(9600);
+  tempSensor.begin();    // initialize the sensor
+  delay(2000);
+  pinMode(ECPin,INPUT);
+  pinMode(ECPower,OUTPUT);//Setting pin for sourcing current
+  pinMode(ECGround,OUTPUT);//setting pin for sinking current
+  digitalWrite(ECPower, LOW);
+  digitalWrite(ECGround,LOW);//We can leave the ground connected permanantly
+  delay(100);// gives sensor time to settle
+  delay(100);
+  //** Adding Digital Pin Resistance to [25 ohm] to the static Resistor *********//
+  // Consule Read-Me for Why, or just accept it as true
+  R1=(R1+Ra);// Taking into acount Powering Pin Resitance
+
+};
+
+
+void loop(){
+   tempSensor.requestTemperatures(); 
+  float Temperature = tempSensor.getTempCByIndex(0);
+  delay(100);
+  float ec_act = GetEC();
+  float ph_act = FindpH();
+  Serial.print(Temperature);
+  Serial.print("X");
+  Serial.print(ec_act);
+  Serial.print("X");
+  Serial.print(ph_act);
+  delay(5000);
+      }
+  
+float GetEC(){
+  tempSensor.requestTemperatures(); 
+  float Temperature = tempSensor.getTempCByIndex(0);
+  pinMode(ECPower, OUTPUT);
+  pinMode(ECGround, OUTPUT);
+  digitalWrite(ECGround, LOW);
+  digitalWrite(ECPower,HIGH);
+  raw= analogRead(ECPin);
+  raw= analogRead(ECPin);// This is not a mistake, First reading will be low beause if charged a capacitor
+  digitalWrite(ECPower,LOW);
+  pinMode(ECPower, INPUT);
+  pinMode(ECGround, LOW);
+  Vdrop= (Vin*raw)/1024.0;
+  Rc=(Vdrop*R1)/(Vin-Vdrop);
+  Rc=Rc-Ra; //acounting for Digital Pin Resitance
+  EC = 1000/(Rc*K);
+  EC25  =  EC/ (1+ TemperatureCoef*(Temperature-25.0));
+  ppm=(EC25)*(PPMconversion*1000*1000);
+  return EC25;
+}
+
+
+float FindpH(){
+  for(int i=0;i<10;i++) 
+ { 
+ buffer_arr[i]=analogRead(pHsensorPin);
+ delay(30);
+ }
+ for(int i=0;i<9;i++)
+ {
+ for(int j=i+1;j<10;j++)
+ {
+ if(buffer_arr[i]>buffer_arr[j])
+ {
+ temp=buffer_arr[i];
+ buffer_arr[i]=buffer_arr[j];
+ buffer_arr[j]=temp;
+ }
+ }
+ }
+ avgval=0;
+ for(int i=2;i<8;i++)
+ avgval+=buffer_arr[i];
+ float volt=(float)avgval*5.0/1024/6;
+ float ph_act = -5.70 * volt + calibration_value;
+ return ph_act;
+}
+
+ 
