@@ -14,7 +14,18 @@ products = ['5V wall adapter','https://www.amazon.com/Excelity-AC-DC-Charger-Pow
         ['Large Planter','https://www.homedepot.com/p/Dynamic-Design-Newbury-Extra-Large-26-85-in-x-12-in-17-qt-Black-Resin-Deck-Box-Outdoor-Planter-NQ2710BK/204506806',1],
         ['pH sensor','https://www.amazon.com/gp/product/B0946D4RSV/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
         ['#4 1/2" screws (100 Qty)','https://www.amazon.com/Flat-Stainless-Phillips-Screws-BCP105/dp/B07C7LGPWR/ref=sr_1_1?adgrpid=1344704227180173&hvadid=84044240071254&hvbmt=be&hvdev=c&hvlocphy=111059&hvnetw=o&hvqmt=e&hvtargid=kwd-84044982918316%3Aloc-190&hydadcr=13520_13392031&keywords=4+1%2F2%E2%80%9D+wood+screws&sr=8-1',1],
-        [
+        ['Duct Fan','https://www.amazon.com/VIVOSUN-Inline-Booster-Noise-Grounded/dp/B01C82SZRM/ref=sr_1_5?keywords=duct+fan&sr=8-5',1],
+        ['5V Relays 8 Qty','https://www.amazon.com/gp/product/B09G6H7JDT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1',1],
+        ['MOSFET Assortment','https://www.amazon.com/BOJACK-IRFZ44N-IRF510N-transistors-Assortment/dp/B082J3F8HJ/ref=sr_1_1_sspa?keywords=IR540N+Mosfet&s=industrial&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',1],
+        ['1  MOhm Resistors (Qty 25)','https://www.amazon.com/EDGELEC-Resistor-Tolerance-Multiple-Resistance/dp/B07QK9278T?ref_=ast_slp_dp&th=1&psc=1',1],
+        ['1 kOhm Resistors (Qty 100)','https://www.amazon.com/EDGELEC-Resistor-Tolerance-Multiple-Resistance/dp/B07QK9278T?ref_=ast_slp_dp&th=1&psc=1',1],
+        ['ELEGOO Uno with USB Cable','https://www.amazon.com/ELEGOO-Board-ATmega328P-ATMEGA16U2-Compliant/dp/B01EWOE0UU/ref=sr_1_1_sspa?keywords=Arduino+Uno&s=industrial&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',1],
+        ['Peristaltic Pumps (Qty 4)','https://www.amazon.com/gp/product/B07Q1C3PW2/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1',1],
+        ['Peristaltic Hosing','https://www.amazon.com/gp/product/B0799FKWQ9/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
+        ['1x1x36 square dowel','https://www.homedepot.com/p/Waddell-36-in-x-1-in-Hardwood-Square-Dowel-8316U/100572443',1],
+        ['10x5x6 plastic container','https://www.amazon.com/interDesign-Kitchen-Organizer-Refrigerator-Freezer/dp/B00CS8DT00/ref=sr_1_5?keywords=10x5x6+plastic+storage+bin&sr=8-5',1],
+
+         
 
 
         ]
