@@ -7,11 +7,21 @@ products = ['5V wall adapter','https://www.amazon.com/Excelity-AC-DC-Charger-Pow
         ['1kg Black PLA filament','https://www.amazon.com/OVERTURE-Filament-Consumables-Dimensional-Accuracy/dp/B07PGY2JP1/ref=sr_1_1_sspa?keywords=PLA%2Bfilament&sr=8-1-spons&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExQUFQTU1YSk5MNzZJJmVuY3J5cHRlZElkPUEwNzYzODU1M1JINjVRWFREVDQyMCZlbmNyeXB0ZWRBZElkPUEwMTE2NjI0MVpOR0o1RjFWMThLNyZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU&th=1',1],
         ['16GB microSD card','https://www.amazon.com/Sandisk-Ultra-Micro-UHS-I-Adapter/dp/B073K14CVB/ref=sr_1_3?keywords=micro+sd+card&nav_sdd=aps&refinements=p_n_feature_two_browse-bin%3A6518303011&rnid=6518301011&s=pc&sr=1-3',1],
         ['Submersible Water Pump','https://www.amazon.com/gp/product/B086QJQK8N/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
-        ['Drip Irrigation Kit','https://www.amazon.com/gp/product/B0B217QKHH/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1]
+        ['Drip Irrigation Kit','https://www.amazon.com/gp/product/B0B217QKHH/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
+        ['Step Up Voltage Regulator (Qty 10)','https://www.amazon.com/gp/product/B089JYBF25/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
+        ['.3125x1.5x4 wood lathe (Qty 50)','https://www.homedepot.com/p/5-16-in-x-1-1-2-in-x-4-ft-Wood-Lath-50-Pack-5860/202093919',1],
+        ['M3 x 35mm screws','https://www.amazon.com/M3-0-5-Button-Stainless-Machine-Hexagon/dp/B09HQKT3WL/ref=sr_1_1_sspa?keywords=m3-0.5+x+35&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEySE02TFQzOUlDTEZXJmVuY3J5cHRlZElkPUEwNDQwNzgxMUhDRjZWT1I0NVlVWSZlbmNyeXB0ZWRBZElkPUEwMjczMTYySFJXWFdBRFRWSjdWJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==',1],
+        ['Large Planter','https://www.homedepot.com/p/Dynamic-Design-Newbury-Extra-Large-26-85-in-x-12-in-17-qt-Black-Resin-Deck-Box-Outdoor-Planter-NQ2710BK/204506806',1],
+        ['pH sensor','https://www.amazon.com/gp/product/B0946D4RSV/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
+        ['#4 1/2" screws (100 Qty)','https://www.amazon.com/Flat-Stainless-Phillips-Screws-BCP105/dp/B07C7LGPWR/ref=sr_1_1?adgrpid=1344704227180173&hvadid=84044240071254&hvbmt=be&hvdev=c&hvlocphy=111059&hvnetw=o&hvqmt=e&hvtargid=kwd-84044982918316%3Aloc-190&hydadcr=13520_13392031&keywords=4+1%2F2%E2%80%9D+wood+screws&sr=8-1',1],
+        [
+
+
         ]
 #Products that must be manually updated, notice how these already have price included as a float
 append_list = [
         ["1in. x 10ft. PVC pipe", 'https://www.homedepot.com/p/Charlotte-Pipe-1-in-x-10-ft-Plastic-Plain-End-Pipe-PVC200100600/100348483', 14, float(3.53)],
-        ["1.5in. x 10ft. ABS pipe",'https://www.homedepot.com/p/VPC-1-5-in-x-10-ft-ABS-Cell-Core-Pipe-29-1510HD/309282454#overlay',1,float(14.46)]
+        ["1.5in. x 10ft. ABS pipe",'https://www.homedepot.com/p/VPC-1-5-in-x-10-ft-ABS-Cell-Core-Pipe-29-1510HD/309282454#overlay',1,float(14.46)],
+        ["2x4x8 wood stud",'https://www.homedepot.com/p/2-in-x-4-in-x-8-ft-Prime-Whitewood-Stud-058449/312528776',1,float(3.35)]
         ]
 
