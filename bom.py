@@ -24,7 +24,7 @@ products = ['5V wall adapter','https://www.amazon.com/Excelity-AC-DC-Charger-Pow
         ['Peristaltic Hosing','https://www.amazon.com/gp/product/B0799FKWQ9/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1],
         ['1x1x36 square dowel','https://www.homedepot.com/p/Waddell-36-in-x-1-in-Hardwood-Square-Dowel-8316U/100572443',1],
         ['10x5x6 plastic container','https://www.amazon.com/interDesign-Kitchen-Organizer-Refrigerator-Freezer/dp/B00CS8DT00/ref=sr_1_5?keywords=10x5x6+plastic+storage+bin&sr=8-5',1],
-
+        ['Miuzei Raspberry Pi 4 Case','https://www.amazon.com/Miuzei-Raspberry-Cooling-Aluminum-Heatsinks/dp/B07TTN1M7G/ref=sr_1_3?keywords=pi+case&sr=8-3',1],
          
 
 
