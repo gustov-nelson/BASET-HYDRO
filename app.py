@@ -15,12 +15,13 @@ camera_index = 0
 max_retries = 5
 
 #Set device ouput pins 
-VDC = 14
-Lights = 15
+Fan = 14
+VDC = 15
 Pump = 18
 Water_Heater = 23
-Heater = 24
-Fan = 25
+Lights = 24
+Heater = 25
+
 Acid = 8
 Base = 7
 Nutrients = 1
@@ -29,15 +30,15 @@ Nutrients = 1
 # Initialize GPIO pins
 GPIO.setwarnings(False) #Ignores a common warning
 GPIO.setmode(GPIO.BCM)  #Sets the layout of pins to be BCM instead of Board. 
-GPIO.setup(VDC, GPIO.OUT, initial=GPIO.HIGH)  # VDC
+GPIO.setup(VDC, GPIO.OUT, initial=GPIO.LOW)  # VDC
 GPIO.setup(Lights, GPIO.OUT, initial=GPIO.HIGH)  # Lights
 GPIO.setup(Pump, GPIO.OUT, initial=GPIO.HIGH)  # Pump
-GPIO.setup(Water_Heater, GPIO.OUT, initial=GPIO.HIGH)  # Water Heater
+GPIO.setup(Water_Heater, GPIO.OUT, initial=GPIO.LOW)  # Water Heater
 GPIO.setup(Heater, GPIO.OUT, initial=GPIO.HIGH)  # Heater
 GPIO.setup(Acid, GPIO.OUT, initial=GPIO.LOW)  # Acid
 GPIO.setup(Base, GPIO.OUT, initial=GPIO.LOW)  # Base
 GPIO.setup(Nutrients, GPIO.OUT, initial=GPIO.LOW)  # Nutrients
-GPIO.setup(Fan, GPIO.OUT, initial=GPIO.HIGH)  # Fan
+GPIO.setup(Fan, GPIO.OUT, initial=GPIO.LOW)  # Fan
 
 
 # Initialize Serial
@@ -50,8 +51,8 @@ pH = float(0.0)
 ec = float(0.0)
 pH_high = float(7.0)
 pH_low = float(6.0)
-ec_high = float(50)
-ec_low = float(40)
+ec_high = float(1.8)
+ec_low = float(1.5)
 water_temp_high = 0.0
 water_temp_low = 0.0
 light_timer_on = 0
@@ -62,7 +63,7 @@ water_heater_state = True
 heater_state = True
 VDC_state = True
 fan_state = True
-
+products = []
 #establish names for Flask Server
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -126,10 +127,20 @@ def combine():  #values must be stated as global so that they are updated when c
     return render_template('index.html',pH_high=pH_high, pH_low=pH_low, ec_high=ec_high, ec_low=ec_low, water_temp_high=water_temp_high, water_temp_low=water_temp_low, light_timer_on=light_timer_on, light_timer_off=light_timer_off,temp=temp,pH=pH,ec=ec, light_state=light_state,pump_state=pump_state,water_heater_state=water_heater_state,VDC_state=VDC_state,fan_state=fan_state,heater_state=heater_state)
 
 # Displays the BOM and estimated cost:
+
+def product_list():
+    global products
+    products = grap_prices()
+    now = datetime.datetime.now()
+    print("BOM ready")
+    while True:
+        if now.hour == 0 and now.minute ==0:  
+            products = grap_prices() #uses the grap_prices() function in extras.py to create the list of products with current prices
+    
 @app.route('/products')
 @auth.login_required
-def product_list():
-    products= grap_prices() #uses the grap_prices() function in extras.py to create the list of products with current prices
+def bom_page():
+    global products
     return render_template('bom.html', products=products)
 
 @app.route('/video_feed')
@@ -159,7 +170,7 @@ def read_serial():
     while True:
         if ser.in_waiting > 0:   #Activates everytime there is a new serial output from the Arduino
             line = ser.readline().decode('utf-8').rstrip() #The data is sent in the format tempXpHXecX to simplify serial communication   
-            temp, ec, pH = map(float, line.split('X'))     #This line splits the single string into three floating values. 
+            temp, pH, ec = map(float, line.split('X'))     #This line splits the single string into three floating values. 
                                                         
 
 # Adds acid, base or nutrients as needed
@@ -167,7 +178,7 @@ def add_buffer():
     global ec, pH, ec_high, ec_low, pH_high, pH_low  #Makes sure the sensor values and settings are updated with sensor data and user input
     ec_target = ((ec_high + ec_low) / 2)
     while True:
-        ec_target = ((ec_high + ec_low) / 2) #Nutrients is given when EC is below mid-point of the recommended range so it never gets too low
+        ec_target = ec_low #Nutrients is given when EC is below mid-point of the recommended range so it never gets too low
 #        print("ec: " + ec)
 #        print("pH: " + pH)
 #        print("ec high: " + ec_high)
@@ -178,16 +189,28 @@ def add_buffer():
             GPIO.output(Nutrients, GPIO.HIGH)
             time.sleep(3)
             GPIO.output(Nutrients, GPIO.LOW)
-        if pH <= (pH_low + 0.5):
+        if pH <= (pH_low + 0.1):
             GPIO.output(Base, GPIO.HIGH)
             time.sleep(3)
             GPIO.output(Base, GPIO.LOW)
-        if pH >= (pH_high - 0.5):
+        if pH >= (pH_high - 0.1):
             GPIO.output(Acid, GPIO.HIGH)
             time.sleep(3)
             GPIO.output(Acid, GPIO.LOW)
         time.sleep(1) #the sleep function takes arguments of seconds, 600 means this function will execute every 10 minutes
 
+'''def light_timer_control():     #Turns lights on and off based on timer
+    global light_timer_on, light_timer_off, light_state # Makes sure the timer changes based on user input
+    while True:
+        if light_state: # Program will skip this code if user wants lights to stay off using device_control()
+            current_hour = int(datetime.datetime.now().hour) #Graps the current hour,between 0(midnight) and 23 (11pm)
+            if (light_timer_on <= current_hour) and (current_hour < light_timer_off): #Compares the current time with the hours of operation
+                GPIO.output(Lights, GPIO.HIGH)
+            else:
+                GPIO.output(Lights, GPIO.LOW)
+        else:
+            GPIO.output(Lights, GPIO.LOW)  #If program skips the rest of the code becasue light_state is False: this turns the lights off
+        time.sleep(1)'''
 def light_timer_control():     #Turns lights on and off based on timer
     global light_timer_on, light_timer_off, light_state # Makes sure the timer changes based on user input
     while True:
@@ -199,7 +222,7 @@ def light_timer_control():     #Turns lights on and off based on timer
                 else:
                     GPIO.output(Lights, GPIO.LOW)
             else: #Executed if the time of operation spans midnight
-                if (current_hour >= light_timer_on) or (current_hour < light_timer off): #Checks if hour is after start of first day or before end of second day 
+                if (current_hour >= light_timer_on) or (current_hour < light_timer_off): #Checks if hour is after start of first day or before end of second day 
                     GPIO.output(Lights, GPIO.HIGH)
                 else:
                     GPIO.output(Lights, GPIO.LOW)
@@ -234,6 +257,8 @@ def initialize_serial():
 #This is where all the functions are threaded together and activated so they can run simultaneously 
 read_serial_thread = threading.Thread(target=read_serial)
 read_serial_thread.start()
+product_list_thread = threading.Thread(target=product_list)
+product_list_thread.start()
 add_buffer_thread = threading.Thread(target=add_buffer)
 add_buffer_thread.start()
 light_timer_control_thread = threading.Thread(target=light_timer_control) 
