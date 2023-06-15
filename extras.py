@@ -50,10 +50,10 @@ def grap_prices():
         return products
 
 
-
+#This code is used to test the web scrapper by itself. 
+#It is very important to comment it out when done otherwise the main module will execute this on boot. 
 #if __name__: "__main__"
 #test = grap_prices()
 #for item in test:
 #    print(item)
 #    print()
-
