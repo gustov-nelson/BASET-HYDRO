@@ -10,7 +10,7 @@ int ECPower=A4;
 int ECGround=A0;
 float PPMconversion=0.7;
 float TemperatureCoef = 0.019; //this changes depending on what chemical we are measuring
-float K=2.1;
+float K=2.8;
 float EC=0;
 float EC25 =0;
 int ppm =0;
@@ -60,9 +60,9 @@ void loop(){
   float ph_act = FindpH();
   Serial.print(Temperature);
   Serial.print("X");
-  Serial.print(ec_act);
-  Serial.print("X");
   Serial.print(ph_act);
+  Serial.print("X");
+  Serial.print(ec_act);
   delay(5000);
       }
   
@@ -113,5 +113,3 @@ float FindpH(){
  float ph_act = -5.70 * volt + calibration_value;
  return ph_act;
 }
-
- 
