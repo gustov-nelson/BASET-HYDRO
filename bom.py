@@ -1,5 +1,5 @@
 #Products that are able to be updated automatically
-products = ['5V wall adapter','https://www.amazon.com/Excelity-AC-DC-Charger-Power-Adapter/dp/B07PGGLRYR/ref=sr_1_3?keywords=5v+power+supply&sr=8-3',1],
+products = [['5V wall adapter','https://www.amazon.com/Excelity-AC-DC-Charger-Power-Adapter/dp/B07PGGLRYR/ref=sr_1_3?keywords=5v+power+supply&sr=8-3',1],
         ['106 Qt. Latching Storage Box', 'https://www.homedepot.com/p/Sterilite-106-Qt-Latching-Storage-Box-14998004/206721484', 1],
         ['Raspberry Pi 4', 'https://www.amazon.com/Raspberry-Pi-Computer-Suitable-Workstation/dp/B0899VXM8F/?_encoding=UTF8&content-id=amzn1.sym.bc5f3394-3b4c-4031-8ac0-18107ac75816&ref_=pd_gw_ci_mcx_mr_hp_atf_m', 1],
         ['Ratchet Pulley', 'https://www.amazon.com/Pairs-inch-Adjustable-Heavy-Hanger/dp/B07XKLLVL7/ref=sr_1_5?keywords=ratchet+pulley&sr=8-5', 1],
@@ -25,10 +25,11 @@ products = ['5V wall adapter','https://www.amazon.com/Excelity-AC-DC-Charger-Pow
         ['1x1x36 square dowel','https://www.homedepot.com/p/Waddell-36-in-x-1-in-Hardwood-Square-Dowel-8316U/100572443',1],
         ['10x5x6 plastic container','https://www.amazon.com/interDesign-Kitchen-Organizer-Refrigerator-Freezer/dp/B00CS8DT00/ref=sr_1_5?keywords=10x5x6+plastic+storage+bin&sr=8-5',1],
         ['Miuzei Raspberry Pi 4 Case','https://www.amazon.com/Miuzei-Raspberry-Cooling-Aluminum-Heatsinks/dp/B07TTN1M7G/ref=sr_1_3?keywords=pi+case&sr=8-3',1],
-         
-
-
+        ['USB Webcam','https://www.amazon.com/gp/product/B07VL7BNLZ/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',1]
+        
         ]
+
+        
 #Products that must be manually updated, notice how these already have price included as a float
 append_list = [
         ["1in. x 10ft. PVC pipe", 'https://www.homedepot.com/p/Charlotte-Pipe-1-in-x-10-ft-Plastic-Plain-End-Pipe-PVC200100600/100348483', 14, float(3.53)],
